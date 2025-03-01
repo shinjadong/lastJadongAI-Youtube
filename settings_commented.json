@@ -1,0 +1,370 @@
+{
+    // 파일 삭제 시 확인 대화 상자를 표시하지 않음
+    // 사용법: true로 설정하면 파일 삭제 시 확인 창이 표시됨, false로 설정하면 바로 삭제됨
+    "explorer.confirmDelete": false,
+
+    // 특정 파일 확장자에 대한 에디터 연결 설정
+    // 사용법: 특정 파일 형식이 열릴 때 사용할 에디터를 지정
+    // "default"는 기본 에디터를 사용한다는 의미
+    "workbench.editorAssociations": {
+        "*.exe": "default",                                    // 실행 파일은 기본 에디터로 열기
+        "*.sqlite": "default",                                 // SQLite 데이터베이스 파일은 기본 에디터로 열기
+        "{git,gitlens,git-graph}:/**/*.{md,csv,svg}": "default" // Git 관련 마크다운, CSV, SVG 파일은 기본 에디터로 열기
+    },
+
+    // 파일 중첩 패턴 설정 - 관련 파일들을 함께 그룹화
+    // 사용법: 왼쪽 패턴의 파일과 오른쪽 패턴의 파일들이 탐색기에서 중첩되어 표시됨
+    // ${capture}는 파일 이름을 캡처하여 재사용하는 변수
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",                                // TypeScript 파일과 관련 JavaScript 파일 중첩
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts", // JavaScript 파일과 관련 파일 중첩
+        "*.jsx": "${capture}.js",                              // JSX 파일과 관련 JS 파일 중첩
+        "*.tsx": "${capture}.ts",                              // TSX 파일과 관련 TS 파일 중첩
+        "tsconfig.json": "tsconfig.*.json",                    // 다양한 tsconfig 파일 중첩
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb", // 패키지 관련 파일 중첩
+        "*.sqlite": "${capture}.${extname}-*",                 // SQLite 데이터베이스 파일 중첩
+        "*.db": "${capture}.${extname}-*",                     // DB 파일 중첩
+        "*.sqlite3": "${capture}.${extname}-*",                // SQLite3 파일 중첩
+        "*.db3": "${capture}.${extname}-*",                    // DB3 파일 중첩
+        "*.sdb": "${capture}.${extname}-*",                    // SDB 파일 중첩
+        "*.s3db": "${capture}.${extname}-*"                    // S3DB 파일 중첩
+    },
+
+    // Oracle 개발 도구 설정 - 연결 구성 파일 폴더 경로
+    // 사용법: Oracle 데이터베이스 연결 시 사용되는 구성 파일 위치 지정
+    // tnsnames.ora, sqlnet.ora 등의 파일이 이 경로에 위치해야 함
+    "oracledevtools.connectionConfiguration.configFilesFolder": "C:\\Users\\wngml\\Oracle\\network\\admin",
+
+    // Oracle SQL 언어 관련 설정
+    // 사용법: Oracle SQL 파일 편집 시 적용되는 에디터 설정
+    "[oraclesql]": {
+        "editor.suggest.showSnippets": true,                   // 코드 스니펫 제안 표시 (SQL 구문 자동 완성)
+        "editor.quickSuggestions": {                           // 빠른 제안 설정
+            "comments": "on",                                  // 주석에서도 제안 표시
+            "strings": "on",                                   // 문자열에서도 제안 표시
+            "other": "on"                                      // 기타 상황에서도 제안 표시
+        }
+    },
+
+    // Oracle 개발 도구 지갑 파일 폴더 경로
+    // 사용법: Oracle 클라우드 연결 시 필요한 지갑 파일 위치 지정
+    // cwallet.sso, ewallet.p12 등의 파일이 이 경로에 위치해야 함
+    "oracledevtools.connectionConfiguration.walletFileFolder": "C:\\Users\\wngml\\Oracle\\network\\admin",
+
+    // Oracle 개발 도구 북마크 파일 폴더 경로
+    // 사용법: Oracle 개발 도구에서 사용하는 북마크 저장 위치
+    "oracledevtools.bookmarkFileFolder": "C:\\Users\\wngml\\Oracle\\oracle.oracledevtools",
+
+    // Oracle 개발 도구 다운로드 폴더 경로
+    // 사용법: Oracle 개발 도구에서 다운로드한 파일이 저장되는 위치
+    "oracledevtools.download.otherFolder": "C:\\Users\\wngml\\downloads",
+
+    // 파일 자동 저장 설정
+    // 사용법: 지정된 시간 후에 자동으로 파일 저장 (기본 1000ms)
+    // 옵션: "off" (끄기), "afterDelay" (지연 후), "onFocusChange" (포커스 변경 시), "onWindowChange" (창 변경 시)
+    "files.autoSave": "afterDelay",
+
+    // Python 환경 생성 트리거 설정
+    // 사용법: Python 프로젝트 열 때 자동으로 환경 생성 여부 (off로 설정하면 수동으로만 생성)
+    // 옵션: "off" (끄기), "onFirstPythonFile" (첫 Python 파일 열 때), "onEnvVarFile" (환경 변수 파일 발견 시)
+    "python.createEnvironment.trigger": "off",
+
+    // Cursor C++ 부분 수락 활성화
+    // 사용법: C++ 코드에서 부분적인 코드 제안 수락 기능 활성화
+    // true로 설정하면 AI 제안 중 일부만 선택적으로 수락 가능
+    "cursor.cpp.enablePartialAccepts": true,
+
+    // 에디터 색상 테마 설정
+    // 사용법: 에디터의 전체적인 색상 테마 지정
+    // 설치된 테마 중 하나를 선택하여 적용
+    "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+
+    // Office 문서 에디터 테마 설정
+    // 사용법: Office 문서 편집 시 사용할 테마 지정
+    // vscode-office 확장 프로그램의 테마 설정
+    "vscode-office.editorTheme": "Github Dark",
+
+    // Cursor Composer 에이전트 린트 루프 설정
+    // 사용법: 코드 린트 오류 발생 시 에이전트 자동 루프 비활성화
+    // false로 설정하면 린트 오류가 발생해도 에이전트가 계속 실행되지 않음
+    "cursor.composer.agentLoopOnLints": false,
+
+    // Office 문서 개요 표시 설정
+    // 사용법: Office 문서 편집 시 개요 패널 자동 표시 여부
+    // true로 설정하면 Office 문서 열 때 자동으로 개요 패널 표시
+    "vscode-office.openOutline": true,
+
+    // 탐색기 드래그 앤 드롭 확인 설정
+    // 사용법: 파일 드래그 앤 드롭 시 확인 대화 상자 표시 여부
+    // false로 설정하면 드래그 앤 드롭 시 확인 없이 바로 이동
+    "explorer.confirmDragAndDrop": false,
+
+    // 에디터 글꼴 크기 설정 (픽셀 단위)
+    // 사용법: 에디터에 표시되는 텍스트의 크기 지정
+    // 숫자가 클수록 글꼴 크기가 커짐
+    "editor.fontSize": 14,
+
+    // 에디터 탭 크기 설정 (공백 수)
+    // 사용법: 탭 키를 누를 때 삽입되는 공백 문자 수
+    // 들여쓰기 크기를 결정함
+    "editor.tabSize": 4,
+
+    // 접근성 지원 설정
+    // 사용법: 스크린 리더와 같은 접근성 도구 지원 활성화
+    // 옵션: "auto" (자동 감지), "on" (항상 켜기), "off" (항상 끄기)
+    "editor.accessibilitySupport": "on",
+
+    // 접근성 페이지 크기 설정
+    // 사용법: 접근성 모드에서 한 번에 읽을 줄 수 지정
+    // 스크린 리더 사용 시 한 번에 읽을 최대 줄 수
+    "editor.accessibilityPageSize": 1000,
+
+    // Diff 에디터 코드 렌즈 설정
+    // 사용법: 파일 비교 시 코드 렌즈(추가 정보) 표시 여부
+    // true로 설정하면 파일 비교 시 추가 정보 표시
+    "diffEditor.codeLens": true,
+
+    // 커서 깜박임 스타일 설정
+    // 사용법: 커서의 깜박임 애니메이션 스타일 지정
+    // 옵션: "blink" (깜박임), "smooth" (부드러운 깜박임), "phase" (페이즈), "expand" (확장), "solid" (고정)
+    "editor.cursorBlinking": "smooth",
+
+    // 커서 부드러운 이동 애니메이션 설정
+    // 사용법: 커서 이동 시 부드러운 애니메이션 효과 적용
+    // 옵션: "off" (끄기), "on" (켜기), "explicit" (명시적으로 활성화)
+    "editor.cursorSmoothCaretAnimation": "explicit",
+
+    // 에디터 글꼴 두께 설정
+    // 사용법: 에디터 텍스트의 글꼴 두께 지정
+    // 옵션: "normal", "bold", "100" ~ "900" 등
+    "editor.fontWeight": "normal",
+
+    // 워크벤치 아이콘 테마 설정
+    // 사용법: 파일 및 폴더 아이콘 테마 지정
+    // 설치된 아이콘 테마 중 하나를 선택하여 적용
+    "workbench.iconTheme": "vscode-icons",
+
+    // 에디터 글꼴 패밀리 설정
+    // 사용법: 에디터에서 사용할 글꼴 목록 지정 (앞에서부터 우선순위)
+    // 첫 번째 글꼴이 없으면 두 번째, 그 다음은 세 번째 글꼴을 사용
+    "editor.fontFamily": "Fira Code, Consolas, 'Courier New', monospace",
+
+    // 글꼴 합자(ligatures) 설정
+    // 사용법: 프로그래밍 합자 기능 활성화 (예: >= 를 ≥ 같은 단일 문자로 표시)
+    // true로 설정하면 합자 기능 활성화, false로 설정하면 비활성화
+    "editor.fontLigatures": true,
+
+    // 창 확대/축소 레벨 설정
+    // 사용법: 전체 UI 확대/축소 수준 지정 (1: 100%, 2: 200% 등)
+    // 숫자가 클수록 UI가 더 크게 표시됨
+    "window.zoomLevel": 0,
+
+    // 트리 뷰 들여쓰기 설정 (픽셀 단위)
+    // 사용법: 탐색기와 같은 트리 뷰의 들여쓰기 간격 지정
+    // 숫자가 클수록 들여쓰기 간격이 넓어짐
+    "tree.indent": 20,
+
+    // 터미널 글꼴 크기 설정
+    // 사용법: 내장 터미널의 글꼴 크기 지정
+    // 숫자가 클수록 터미널 글꼴 크기가 커짐
+    "terminal.integrated.fontSize": 14,
+
+    // 디버그 콘솔 글꼴 크기 설정
+    // 사용법: 디버그 콘솔의 글꼴 크기 지정
+    // 숫자가 클수록 디버그 콘솔 글꼴 크기가 커짐
+    "debug.console.fontSize": 14,
+
+    // 터미널 글꼴 두께 설정
+    // 사용법: 내장 터미널의 글꼴 두께 지정
+    // 옵션: "normal", "bold", "100" ~ "900" 등
+    "terminal.integrated.fontWeight": "normal",
+
+    // 패널 제목 활성 전경색 설정
+    // 사용법: 활성 패널 제목의 텍스트 색상 지정
+    // 16진수 색상 코드로 지정 (#RRGGBB 형식)
+    "panelTitle.activeForeground": "#ffffff",
+
+    // 워크벤치 색상 사용자 정의 설정
+    // 사용법: UI 요소별 색상을 사용자 정의하여 테마 커스터마이징
+    // 각 UI 요소의 색상을 16진수 색상 코드로 지정
+    "workbench.colorCustomizations": {
+        "editor.background": "#282c34",                        // 에디터 배경색을 #282c34로 변경
+        "editorLineNumber.foreground": "#566274",              // 줄 번호 색상
+        "editor.lineHighlightBackground": "#2c313a",           // 현재 줄 강조 배경색 조정
+        "editor.selectionBackground": "#3e4451",               // 선택 영역 배경색 조정
+        "sideBar.background": "#272727",                       // 사이드바 배경색
+        "activityBar.background": "#3c3836",                   // 활동 바 배경색
+        "titleBar.activeBackground": "#3c3836",                // 제목 표시줄 활성 배경색
+        "sideBarSectionHeader.background": "#3c3836",          // 사이드바 섹션 헤더 배경색
+        "sideBarSectionHeader.foreground": "#e5c07b",          // 사이드바 섹션 헤더 텍스트 색상
+        "list.activeSelectionBackground": "#3c3836",           // 목록 활성 선택 배경색
+        "list.hoverBackground": "#3c3836",                     // 목록 호버 배경색
+        "list.inactiveSelectionBackground": "#2d2d2d",         // 목록 비활성 선택 배경색
+        "terminal.background": "#272727",                      // 터미널 배경색
+        "terminal.foreground": "#d8d8d8",                      // 터미널 텍스트 색상
+        "panel.background": "#272727",                         // 패널 배경색
+        "panel.border": "#3c3836",                             // 패널 테두리 색상
+        "panelTitle.activeBorder": "#e5c07b",                  // 활성 패널 제목 테두리 색상
+        "terminal.ansiBlack": "#272727",                       // 터미널 ANSI 검정색
+        "terminal.ansiRed": "#e06c75",                         // 터미널 ANSI 빨간색
+        "terminal.ansiGreen": "#98c379",                       // 터미널 ANSI 녹색
+        "terminal.ansiYellow": "#e5c07b",                      // 터미널 ANSI 노란색
+        "terminal.ansiBlue": "#61afef",                        // 터미널 ANSI 파란색
+        "terminal.ansiMagenta": "#c678dd",                     // 터미널 ANSI 자주색
+        "terminal.ansiCyan": "#56b6c2",                        // 터미널 ANSI 청록색
+        "terminal.ansiWhite": "#d8d8d8",                       // 터미널 ANSI 흰색
+        "editor.findMatchBackground": "#e5c07b55",             // 찾기 일치 배경색
+        "editor.findMatchHighlightBackground": "#61afef44",    // 찾기 일치 강조 배경색
+        "editor.lineHighlightBorder": "#2c313a00",             // 현재 줄 강조 테두리 색상
+        "contrastBorder": "#3c3836",                           // 대비 테두리 색상
+        "focusBorder": "#3c3836",                              // 포커스 테두리 색상
+        "editorWidget.background": "#272727",                  // 에디터 위젯 배경색
+        "editorWidget.border": "#3c3836",                      // 에디터 위젯 테두리 색상
+        "list.highlightForeground": "#e5c07b",                 // 목록 강조 텍스트 색상
+        "editorGroupHeader.tabsBackground": "#282c34",         // 탭 배경색 추가
+        "tab.activeBackground": "#323842",                     // 활성 탭 배경색 추가
+        "tab.inactiveBackground": "#282c34",                   // 비활성 탭 배경색 추가
+        "statusBar.background": "#282c34",                     // 상태 표시줄 배경색 추가
+        "breadcrumb.background": "#282c34",                    // 이동 경로 배경색 추가
+        "editorGutter.background": "#282c34",                  // 거터 배경색 추가
+        "editor.foreground": "#abb2bf"                         // 에디터 텍스트 색상을 Claude 스타일 색상으로 변경
+    },
+    
+    // 에디터 토큰 색상 사용자 정의 설정
+    // 사용법: 코드 구문 강조 색상을 사용자 정의
+    "editor.tokenColorCustomizations": {
+        "[GitHub Dark Colorblind (Beta)]": {
+            "textMateRules": [
+                {
+                    "scope": ["keyword", "storage.type", "storage.modifier"],
+                    "settings": {
+                        "foreground": "#c678dd",               // 키워드 색상 (purple)
+                        "fontStyle": ""                         // 키워드 볼드 제거
+                    }
+                },
+                {
+                    "scope": ["keyword.operator.logical"],
+                    "settings": {
+                        "foreground": "#56b6c2"                // 논리 연산자(||, &&) 색상 (cyan)
+                    }
+                },
+                {
+                    "scope": ["variable.other.constant", "variable.other.readwrite", "variable"],
+                    "settings": {
+                        "foreground": "#abb2bf"                // 변수명 색상 (밝은 회색)
+                    }
+                },
+                {
+                    "scope": ["entity.name.tag", "punctuation.definition.tag"],
+                    "settings": {
+                        "foreground": "#e06c75"                // HTML/JSX 태그 색상 (다홍색)
+                    }
+                },
+                {
+                    "scope": ["entity.other.attribute-name"],
+                    "settings": {
+                        "foreground": "#d19a66"                // HTML/JSX 속성 색상 (오렌지색)
+                    }
+                },
+                {
+                    "scope": ["string", "punctuation.definition.string"],
+                    "settings": {
+                        "foreground": "#98c379"                // 문자열 색상 (녹색)
+                    }
+                },
+                {
+                    "scope": ["comment"],
+                    "settings": {
+                        "foreground": "#5c6370",               // 주석 색상 (회색)
+                        "fontStyle": "italic"                  // 주석 이탤릭체로 설정
+                    }
+                },
+                {
+                    "scope": ["punctuation", "meta.brace", "meta.brackets", "meta.punctuation.brackets"],
+                    "settings": {
+                        "foreground": "#ffffff"                // 괄호, 구두점 색상 (흰색)
+                    }
+                },
+                {
+                    "scope": ["entity.name.function", "support.function", "meta.method-call", "meta.function-call"],
+                    "settings": {
+                        "foreground": "#56b6c2"                // 함수/메서드 호출 색상 (cyan)
+                    }
+                },
+                {
+                    "scope": ["entity.name.class", "entity.name.type.class", "support.class"],
+                    "settings": {
+                        "foreground": "#e6c07b"                // 클래스명 색상 (노란색)
+                    }
+                },
+                {
+                    "scope": ["support.type.builtin", "support.type.primitive"],
+                    "settings": {
+                        "foreground": "#56b6c2"                // 내장 타입 색상 (cyan)
+                    }
+                },
+                {
+                    "scope": ["support.class.builtin", "support.class.component"],
+                    "settings": {
+                        "foreground": "#e5c07b"                // 내장 클래스 및 컴포넌트 색상 (노란색)
+                    }
+                },
+                {
+                    "scope": ["keyword.operator"],
+                    "settings": {
+                        "foreground": "#56b6c2"                // 연산자 색상 (cyan)
+                    }
+                },
+                {
+                    "scope": ["meta.object-literal.key", "variable.object.property"],
+                    "settings": {
+                        "foreground": "#e06c75"                // 객체 속성 키 색상 (다홍색)
+                    }
+                },
+                {
+                    "scope": ["meta.jsx.children", "meta.tag.attributes"],
+                    "settings": {
+                        "foreground": "#abb2bf"                // JSX 내부 텍스트 색상 (밝은 회색)
+                    }
+                },
+                {
+                    "scope": ["constant.numeric"],
+                    "settings": {
+                        "foreground": "#d19a66"                // 숫자 색상 (오렌지색)
+                    }
+                },
+                {
+                    "scope": ["constant.language"],
+                    "settings": {
+                        "foreground": "#56b6c2"                // 언어 상수(true, false, null 등) 색상 (cyan)
+                    }
+                },
+                {
+                    "scope": ["meta.link", "markup.underline.link"],
+                    "settings": {
+                        "foreground": "#61aeee"                // 링크 색상 (밝은 파란색)
+                    }
+                },
+                {
+                    "scope": ["markup.bold"],
+                    "settings": {
+                        "fontStyle": "bold"                    // 마크다운 볼드 텍스트 스타일
+                    }
+                },
+                {
+                    "scope": ["markup.italic"],
+                    "settings": {
+                        "fontStyle": "italic"                  // 마크다운 이탤릭 텍스트 스타일
+                    }
+                },
+                {
+                    "scope": ["markup.heading"],
+                    "settings": {
+                        "foreground": "#e06c75",               // 마크다운 헤딩 색상 (다홍색)
+                        "fontStyle": "bold"                    // 마크다운 헤딩 볼드 스타일
+                    }
+                }
+            ]
+        }
+    }
+} 
