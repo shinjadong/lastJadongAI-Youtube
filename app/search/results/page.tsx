@@ -305,12 +305,56 @@ export default function SearchResultsPage() {
   };
 
   const filteredVideos = videos.filter((video) => {
-    if (filterBy === "all") return true;
-    return video.contribution === filterBy || video.performance === filterBy;
+    // 조회수 필터
+    const views = Number(video.views || 0);
+    if (views < activeFilters.viewsRange[0] || views > activeFilters.viewsRange[1]) {
+      return false;
+    }
+
+    // 구독자 수 필터
+    const subscribers = Number(video.subscribers || 0);
+    if (subscribers < activeFilters.subscribersRange[0] || subscribers > activeFilters.subscribersRange[1]) {
+      return false;
+    }
+
+    // 게시일 필터
+    if (activeFilters.publishDateRange.from || activeFilters.publishDateRange.to) {
+      const publishDate = new Date(video.publishDate);
+      if (activeFilters.publishDateRange.from && publishDate < activeFilters.publishDateRange.from) {
+        return false;
+      }
+      if (activeFilters.publishDateRange.to && publishDate > activeFilters.publishDateRange.to) {
+        return false;
+      }
+    }
+
+    // 후킹지수 필터 (performance)
+    if (!activeFilters.hookIndex.includes(video.performance)) {
+      return false;
+    }
+
+    // 성장지수 필터 (contribution)
+    if (!activeFilters.growthIndex.includes(video.contribution)) {
+      return false;
+    }
+
+    // 비디오 타입 필터
+    const isShort = video.duration ? 
+      video.duration.includes("PT") && 
+      !video.duration.includes("H") && 
+      (!video.duration.includes("M") || parseInt(video.duration.match(/PT(\d+)M/)?.[1] || "0", 10) < 1) && 
+      parseInt(video.duration.match(/PT(?:\d+M)?(\d+)S/)?.[1] || "0", 10) <= 60 : 
+      false;
+    
+    const videoType = isShort ? "shorts" : "longform";
+    if (!activeFilters.videoType.includes(videoType)) {
+      return false;
+    }
+
+    return true;
   });
 
-  const youtubeVideos = filteredVideos.map(video => convertToYouTubeVideo(video));
-
+  // 정렬 로직
   const sortedVideos = [...filteredVideos].sort((a, b) => {
     if (sortBy === "views") {
       return Number(b.views || 0) - Number(a.views || 0);
@@ -318,9 +362,15 @@ export default function SearchResultsPage() {
       return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
     } else if (sortBy === "subscribers") {
       return Number(b.subscribers || 0) - Number(a.subscribers || 0);
+    } else if (sortBy === "duration") {
+      const durationA = convertDurationToSeconds(a.duration);
+      const durationB = convertDurationToSeconds(b.duration);
+      return durationB - durationA;
     }
     return 0;
   });
+
+  const youtubeVideos = filteredVideos.map(video => convertToYouTubeVideo(video));
 
   if (status === "unauthenticated") {
     return null;
